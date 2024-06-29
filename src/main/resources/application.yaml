@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: partner-film-chooser
+  datasource:
+    url: jdbc:postgresql://db/default
+    username: admin
+    password: verySecurePassword
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none

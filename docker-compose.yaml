@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+
+  web-server:
+    build: .
+    restart: always
+    ports:
+      - "80:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16.3
+    restart: always
+    # set shared memory limit when using docker-compose
+    shm_size: 128mb
+    environment:
+      POSTGRES_DB: default
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: verySecurePassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8081:8080"
+
+volumes:
+  pgdata:
