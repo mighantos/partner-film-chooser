@@ -16,9 +16,10 @@ jobs:
 
       - name: Get Next Version
         id: semver
-        uses: ietf-tools/semver-action@v1
+        uses: ietf-tools/semver-action@v1.8.0
         with:
           token: ${{ github.token }}
+          majorList: "!,feat!"
           branch: main
 
       - name: Create Release
@@ -29,5 +30,4 @@ jobs:
           makeLatest: true
           name: ${{ steps.semver.outputs.next }}
           body: Changelog Contents
-          majorList: !,feat!
           token: ${{ github.token }}
