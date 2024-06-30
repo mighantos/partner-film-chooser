@@ -20,6 +20,8 @@ jobs:
         with:
           token: ${{ github.token }}
           majorList: "!,feat!"
+          noVersionBumpBehavior: silent
+          noNewCommitBehavior: silent
           branch: main
 
       - name: Create Release
