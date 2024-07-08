@@ -20,7 +20,7 @@ repositories {
 }
 
 val springVersion = "3.3.1"
-val jacksonVersion = "2.17.1"
+val jacksonVersion = "2.17.2"
 val kotlinVersion = "2.0.0"
 val junitVersion = "1.10.3"
 val posgresqlVersion = "42.7.3"
