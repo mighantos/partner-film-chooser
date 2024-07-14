@@ -23,9 +23,11 @@ val springVersion = "3.3.1"
 val jacksonVersion = "2.17.1"
 val kotlinVersion = "2.0.0"
 val junitVersion = "1.10.3"
-val posgresqlVersion = "42.7.3"
+val postgresqlVersion = "42.7.3"
+val flywayVersion = "10.15.2"
 
 dependencies {
+	implementation("org.springframework.boot:spring-boot-starter-security:$springVersion")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa:$springVersion")
 	implementation("org.springframework.boot:spring-boot-starter-web:$springVersion")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
@@ -33,7 +35,9 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test:$springVersion")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher:$junitVersion")
-	runtimeOnly("org.postgresql:postgresql:$posgresqlVersion")
+	runtimeOnly("org.postgresql:postgresql:$postgresqlVersion")
+	implementation("org.flywaydb:flyway-core:$flywayVersion")
+	implementation("org.flywaydb:flyway-database-postgresql:$flywayVersion")
 }
 
 kotlin {
