@@ -8,7 +8,7 @@ data class UserDto(
     val lastName: String,
     val password: String,
 ) {
-    fun toUser(): User{
+    fun toUser(): User {
         return User(email, firstName, lastName, password)
     }
 }

@@ -16,7 +16,7 @@ class UserService(val userRepository: UserRepository) {
     }
 
     fun createUser(userDto: UserDto): UUID {
-        if(userRepository.existsByEmail(userDto.email))
+        if (userRepository.existsByEmail(userDto.email))
             throw AlreadyExistsException()
         val user = userRepository.save(userDto.toUser())
         return user.id!!

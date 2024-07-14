@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class PartnerFilmChooserApplication
 
 fun main(args: Array<String>) {
-	runApplication<PartnerFilmChooserApplication>(*args)
+    runApplication<PartnerFilmChooserApplication>(*args)
 }
