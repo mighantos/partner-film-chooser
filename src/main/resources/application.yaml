@@ -2,10 +2,32 @@ spring:
   application:
     name: partner-film-chooser
   datasource:
-    url: jdbc:postgresql://db/default
-    username: admin
-    password: verySecurePassword
+    url: jdbc:postgresql://partners-app-db/${PARTNERS_APP_DB}
+    username: ${PARTNERS_APP_DB_USER}
+    password: ${PARTNERS_APP_DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: create-drop
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: ${keycloak.issuer-url}/realms/${keycloak.realm}
+            authorization-grant-type: ${keycloak.authorization-grant-type}
+            scope: openid
+        provider:
+          keycloak:
+            issuer-uri: ${keycloak.issuer-url}/realms/${keycloak.realm}
+            user-name-attribute: ${keycloak.user-name-attribute}
+      resourceserver:
+        jwt:
+          issuer-uri: ${keycloak.issuer-url}/realms/${keycloak.realm}
+
+keycloak:
+  issuer-url: http://keycloak
+  realm: custom
+  client-id: Partners-app
+  authorization-grant-type: authorization_code
+  user-name-attribute: preferred_username
