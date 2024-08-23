@@ -2,6 +2,7 @@ package com.mighantos.partner_film_chooser.service
 
 import com.mighantos.partner_film_chooser.model.User
 import com.mighantos.partner_film_chooser.repository.UserRepository
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
@@ -11,8 +12,9 @@ class UserService(
     private val repository: UserRepository,
 ) {
     @Transactional(readOnly = true)
-    fun current(id: UUID): User {
-        return repository.findById(id).get()
+    fun current(): User {
+        val currentUserId = SecurityContextHolder.getContext().authentication!!.name
+        return repository.findById(UUID.fromString(currentUserId)).get()
     }
 
     @Transactional
