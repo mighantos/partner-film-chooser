@@ -1,19 +1,25 @@
 package com.mighantos.partner_film_chooser.model
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
+import jakarta.persistence.*
+import java.util.*
 
 @Entity(name = "user_app")
 class User(
-    @Column(nullable = false, unique = true)
-    var email: String,
+    @Id
+    val id: UUID
+) {
+    @OneToMany(mappedBy = "creator")
+    private val partnersMeetingsCreators: Set<PartnersMeeting> = setOf()
 
-    @Column(nullable = false)
-    var firstName: String,
+    @OneToMany(mappedBy = "partner")
+    private val partnersMeetingsPartners: Set<PartnersMeeting> = setOf()
 
-    @Column(nullable = false)
-    var lastName: String,
+    @Transient
+    val partnersMeetings: MutableSet<PartnersMeeting> = mutableSetOf()
 
-    @Column(nullable = false)
-    var password: String,
-) : BaseEntity()
+    @PostLoad
+    fun postLoad() {
+        partnersMeetings.addAll(partnersMeetingsCreators)
+        partnersMeetings.addAll(partnersMeetingsPartners)
+    }
+}
