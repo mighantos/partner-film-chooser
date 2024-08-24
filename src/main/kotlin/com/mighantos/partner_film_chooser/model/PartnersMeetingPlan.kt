@@ -1,10 +1,7 @@
 package com.mighantos.partner_film_chooser.model
 
 import com.mighantos.partner_film_chooser.dto.PartnersMeetingPlanDto
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
+import jakarta.persistence.*
 import java.util.*
 
 @Entity
@@ -25,8 +22,19 @@ class PartnersMeetingPlan(
 
     @Column(nullable = false)
     var period: Short,
+
+    @OneToMany(mappedBy = "meetingPlan", cascade = [CascadeType.ALL])
+    val meetingItems: MutableList<PartnersMeetingItem>,
 ) : BaseEntity() {
     fun toDto(): PartnersMeetingPlanDto {
-        return PartnersMeetingPlanDto(id, title, creator.toDto(), partner.toDto(), startingDate, period)
+        return PartnersMeetingPlanDto(
+            id,
+            title,
+            creator.toDto(),
+            partner.toDto(),
+            startingDate,
+            period,
+            meetingItems.map(PartnersMeetingItem::toDto)
+        )
     }
 }

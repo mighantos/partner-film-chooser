@@ -21,7 +21,6 @@ import org.springframework.security.web.SecurityFilterChain
 class SecurityConfig(
     val keycloakConfigurationProperties: KeycloakConfigurationProperties,
 ) {
-
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http {

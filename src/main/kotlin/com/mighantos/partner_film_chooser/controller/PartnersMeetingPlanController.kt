@@ -19,7 +19,7 @@ class PartnersMeetingPlanController(
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun createMeeting(partnersMeetingPlanDto: PartnersMeetingPlanDto) {
+    fun createMeeting(@RequestBody partnersMeetingPlanDto: PartnersMeetingPlanDto) {
         service.create(partnersMeetingPlanDto)
     }
 }

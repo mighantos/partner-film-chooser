@@ -1,5 +1,6 @@
 package com.mighantos.partner_film_chooser.service
 
+import com.mighantos.partner_film_chooser.dto.UserDto
 import com.mighantos.partner_film_chooser.model.User
 import com.mighantos.partner_film_chooser.repository.UserRepository
 import org.springframework.security.core.context.SecurityContextHolder
@@ -16,6 +17,12 @@ class UserService(
         val currentUserId = SecurityContextHolder.getContext().authentication!!.name
         return repository.findById(UUID.fromString(currentUserId)).get()
     }
+
+    @Transactional(readOnly = true)
+    fun find(userDto: UserDto): Optional<User> {
+        return repository.findById(userDto.id)
+    }
+
 
     @Transactional
     fun create(id: UUID): User {

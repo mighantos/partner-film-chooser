@@ -8,5 +8,6 @@ data class PartnersMeetingPlanDto(
     val creator: UserDto,
     val partner: UserDto,
     val startingDate: Date,
-    val period: Short
+    val period: Short,
+    val meetingItems: List<PartnersMeetingItemDto>,
 )
