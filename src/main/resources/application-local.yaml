@@ -1,3 +1,9 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/default
+    url: jdbc:postgresql://localhost:5432/${PARTNERS_APP_DB}
+  flyway:
+    locations: classpath:db/migration,classpath:db/data
+    user: ${spring.datasource.username}
+
+keycloak:
+  issuer-url: http://localhost:8081

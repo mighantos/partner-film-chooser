@@ -1,0 +1,51 @@
+{
+  "realm": "custom",
+  "displayName": "Custom realm",
+  "enabled": true,
+  "sslRequired": "external",
+  "registrationAllowed": true,
+  "requiredCredentials": [
+    "password"
+  ],
+  "clients": [
+    {
+      "clientId": "Partners-app",
+      "name": "Partners app",
+      "enabled": true,
+      "bearerOnly": false,
+      "protocol": "openid-connect",
+      "redirectUris": [
+        "*"
+      ],
+      "webOrigins": [
+        "*"
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "name": "Partners_app_users",
+      "path": "/Partners_app_users",
+      "subGroups": [],
+      "attributes": {},
+      "realmRoles": [],
+      "clientRoles": {
+        "Partners-app": [
+          "USER"
+        ]
+      }
+    }
+  ],
+  "roles": {
+    "client": {
+      "Partners-app": [
+        {
+          "name": "USER",
+          "composite": false,
+          "clientRole": true,
+          "attributes": {}
+        }
+      ]
+    }
+  }
+}

@@ -2,28 +2,32 @@ version: '3.9'
 
 services:
 
-  web-server:
-    build: .
-    restart: always
-    ports:
-      - "80:8080"
-    depends_on:
-      db:
-        condition: service_healthy
+  #  web-server:
+  #    build: .
+  #    restart: always
+  #    ports:
+  #      - "80:8080"
+  #    depends_on:
+  #      partners-app-db:
+  #        condition: service_healthy
+  #    networks:
+  #      - keycloak_network
 
-  db:
+  partners-app-db:
     image: postgres:16.3
     restart: always
     # set shared memory limit when using docker-compose
     shm_size: 128mb
     environment:
-      POSTGRES_DB: default
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: verySecurePassword
+      POSTGRES_DB: ${PARTNERS_APP_DB}
+      POSTGRES_USER: ${PARTNERS_APP_DB_USER}
+      POSTGRES_PASSWORD: ${PARTNERS_APP_DB_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - partners_app_db_data:/var/lib/postgresql/data
+    networks:
+      - keycloak_network
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready" ]
       interval: 1s
@@ -34,7 +38,54 @@ services:
     image: adminer
     restart: always
     ports:
+      - "8082:8080"
+    networks:
+      - keycloak_network
+
+  keycloak-db:
+    image: postgres:16.3
+    environment:
+      POSTGRES_DB: ${KEYCLOAK_DB}
+      POSTGRES_USER: ${KEYCLOAK_DB_USER}
+      POSTGRES_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+    restart: always
+    volumes:
+      - keycloak_db_data:/var/lib/postgresql/data
+    networks:
+      - keycloak_network
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0.2
+    command: start-dev --import-realm
+    environment:
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: 8080
+      KC_HOSTNAME_STRICT_BACKCHANNEL: false
+      KC_HTTP_ENABLED: true
+      KC_HOSTNAME_STRICT_HTTPS: false
+      KC_HEALTH_ENABLED: true
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+#      KEYCLOAK_IMPORT: /opt/keycloak/data/import/realm-export.json
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://keycloak-db/${KEYCLOAK_DB}
+      KC_DB_USERNAME: ${KEYCLOAK_DB_USER}
+      KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+    restart: always
+    ports:
       - "8081:8080"
+    volumes:
+      - ./custom-realm.json:/opt/keycloak/data/import/custom-realm.json
+    depends_on:
+      - keycloak-db
+    networks:
+      - keycloak_network
 
 volumes:
-  pgdata:
+  partners_app_db_data:
+  keycloak_db_data:
+    driver: local
+
+networks:
+  keycloak_network:
+    driver: bridge
