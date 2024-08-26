@@ -24,7 +24,7 @@ val jacksonVersion = "2.17.2"
 val kotlinVersion = "2.0.20"
 val junitVersion = "1.10.3"
 val postgresqlVersion = "42.7.3"
-val flywayVersion = "10.15.2"
+val flywayVersion = "10.17.2"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security:$springVersion")
