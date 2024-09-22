@@ -66,7 +66,6 @@ services:
       KC_HEALTH_ENABLED: true
       KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
       KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
-#      KEYCLOAK_IMPORT: /opt/keycloak/data/import/realm-export.json
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://keycloak-db/${KEYCLOAK_DB}
       KC_DB_USERNAME: ${KEYCLOAK_DB_USER}
