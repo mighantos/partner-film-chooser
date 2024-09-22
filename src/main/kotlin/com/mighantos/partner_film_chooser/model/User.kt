@@ -10,19 +10,19 @@ class User(
     val id: UUID,
 ) {
     @OneToMany(mappedBy = "creator")
-    private val partnersMeetingPlansAsCreator: Set<PartnersMeetingPlan> = setOf()
+    private val meetingPlansAsCreator: Set<MeetingPlan> = setOf()
 
     @OneToMany(mappedBy = "partner")
-    private val partnersMeetingPlansAsPartner: Set<PartnersMeetingPlan> = setOf()
+    private val meetingPlansAsPartner: Set<MeetingPlan> = setOf()
 
     @Transient
-    var partnersMeetingPlans: MutableSet<PartnersMeetingPlan> = mutableSetOf()
+    var meetingPlans: MutableSet<MeetingPlan> = mutableSetOf()
 
     @PostLoad
     fun postLoad() {
-        partnersMeetingPlans = mutableSetOf()
-        partnersMeetingPlans.addAll(partnersMeetingPlansAsCreator)
-        partnersMeetingPlans.addAll(partnersMeetingPlansAsPartner)
+        meetingPlans = mutableSetOf()
+        meetingPlans.addAll(meetingPlansAsCreator)
+        meetingPlans.addAll(meetingPlansAsPartner)
     }
 
     fun toDto(): UserDto {

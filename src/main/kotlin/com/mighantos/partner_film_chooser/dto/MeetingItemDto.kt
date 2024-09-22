@@ -2,7 +2,7 @@ package com.mighantos.partner_film_chooser.dto
 
 import com.mighantos.partner_film_chooser.util.MeetingItemType
 
-data class PartnersMeetingItemDto(
+data class MeetingItemDto(
     val title: String,
     val description: String,
     val itemType: MeetingItemType,

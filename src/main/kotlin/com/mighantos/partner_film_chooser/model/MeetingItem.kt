@@ -1,11 +1,11 @@
 package com.mighantos.partner_film_chooser.model
 
-import com.mighantos.partner_film_chooser.dto.PartnersMeetingItemDto
+import com.mighantos.partner_film_chooser.dto.MeetingItemDto
 import com.mighantos.partner_film_chooser.util.MeetingItemType
 import jakarta.persistence.*
 
 @Entity
-class PartnersMeetingItem(
+class MeetingItem(
     @Column(nullable = false)
     val title: String,
 
@@ -20,9 +20,9 @@ class PartnersMeetingItem(
 
     @ManyToOne
     @JoinColumn(name = "meeting_plan_id", nullable = false)
-    val meetingPlan: PartnersMeetingPlan,
+    val meetingPlan: MeetingPlan,
 ) : BaseEntity() {
-    fun toDto(): PartnersMeetingItemDto {
-        return PartnersMeetingItemDto(title, description, itemType, itemOrder)
+    fun toDto(): MeetingItemDto {
+        return MeetingItemDto(title, description, itemType, itemOrder)
     }
 }

@@ -1,11 +1,11 @@
 package com.mighantos.partner_film_chooser.model
 
-import com.mighantos.partner_film_chooser.dto.PartnersMeetingPlanDto
+import com.mighantos.partner_film_chooser.dto.MeetingPlanDto
 import jakarta.persistence.*
 import java.util.*
 
 @Entity
-class PartnersMeetingPlan(
+class MeetingPlan(
     @Column(nullable = false)
     val title: String,
 
@@ -24,17 +24,17 @@ class PartnersMeetingPlan(
     var period: Short,
 
     @OneToMany(mappedBy = "meetingPlan", cascade = [CascadeType.ALL])
-    val meetingItems: MutableList<PartnersMeetingItem>,
+    val meetingItems: MutableList<MeetingItem>,
 ) : BaseEntity() {
-    fun toDto(): PartnersMeetingPlanDto {
-        return PartnersMeetingPlanDto(
+    fun toDto(): MeetingPlanDto {
+        return MeetingPlanDto(
             id,
             title,
             creator.toDto(),
             partner.toDto(),
             startingDate,
             period,
-            meetingItems.map(PartnersMeetingItem::toDto)
+            meetingItems.map(MeetingItem::toDto)
         )
     }
 }
