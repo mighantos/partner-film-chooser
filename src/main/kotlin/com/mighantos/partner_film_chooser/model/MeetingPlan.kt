@@ -25,6 +25,9 @@ class MeetingPlan(
 
     @OneToMany(mappedBy = "meetingPlan", cascade = [CascadeType.ALL])
     val meetingItems: MutableList<MeetingItem>,
+
+    @OneToMany(mappedBy = "meetingPlan", cascade = [CascadeType.ALL])
+    val meetingInstances: MutableList<MeetingInstance>,
 ) : BaseEntity() {
     fun toDto(): MeetingPlanDto {
         return MeetingPlanDto(
