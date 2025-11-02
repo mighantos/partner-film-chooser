@@ -1,0 +1,25 @@
+meta {
+  name: meetingItem
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{url}}/partners-meeting/cc54b528-b12c-4a21-9fcb-7fffc22ade65/item
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title": "What was the highlight for you?",
+    "description": "",
+    "itemType": "TEXT_FIELD",
+    "order": 1
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

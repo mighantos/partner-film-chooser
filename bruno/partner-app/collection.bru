@@ -1,0 +1,26 @@
+auth {
+  mode: oauth2
+}
+
+auth:oauth2 {
+  grant_type: authorization_code
+  callback_url: {{url}}/
+  authorization_url: {{keycloak-url}}/realms/{{realm}}/protocol/openid-connect/auth
+  access_token_url: {{keycloak-url}}/realms/{{realm}}/protocol/openid-connect/token
+  refresh_token_url: 
+  client_id: Partners-app
+  client_secret: {{client-secret}}
+  scope: 
+  state: 
+  pkce: false
+  credentials_placement: body
+  credentials_id: credentials
+  token_placement: header
+  token_header_prefix: Bearer
+  auto_fetch_token: true
+  auto_refresh_token: true
+}
+
+vars:pre-request {
+  realm: custom
+}

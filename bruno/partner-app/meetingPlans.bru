@@ -1,0 +1,53 @@
+meta {
+  name: meetingPlans
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{url}}/partners-meeting
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title": "Nedělní meeting",
+    "partner": {
+      "id": "65b6f965-75ab-402b-b47a-7158da85ae03"
+    },
+    "startingDate": "2025-11-09T17:00:00.000+02:00",
+    "period": 7,
+    "meetingItems": [
+      {
+        "title": "What was the highlight for you?",
+        "description": "",
+        "itemType": "TEXT_FIELD",
+        "order": 1
+      },
+      {
+        "title": "What was the hardest part?",
+        "description": "",
+        "itemType": "TEXT_FIELD",
+        "order": 2
+      },
+      {
+        "title": "What was one thing you each learned?",
+        "description": "",
+        "itemType": "TEXT_FIELD",
+        "order": 3
+      },
+      {
+        "title": "Review scheduled events for the upcoming week.",
+        "description": " If you have any parties or outings that both of you need to be aware of, jot them down now and add them to a full calendar after the meeting if desired.",
+        "itemType": "TEXT_FIELD",
+        "order": 4
+      },
+    ]
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
