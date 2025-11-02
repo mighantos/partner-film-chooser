@@ -15,8 +15,9 @@ import java.util.*
 class MeetingPlanController(
     val service: MeetingPlanService,
 ) {
+    @CrossOrigin(origins = ["http://localhost:4200"])
     @GetMapping
-    fun getAllMeetings(): Set<MeetingPlanDto> {
+    fun getAllMeetings(): List<MeetingPlanDto> {
         return service.findAll()
     }
 

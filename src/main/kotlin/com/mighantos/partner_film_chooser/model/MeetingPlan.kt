@@ -2,7 +2,7 @@ package com.mighantos.partner_film_chooser.model
 
 import com.mighantos.partner_film_chooser.dto.MeetingPlanDto
 import jakarta.persistence.*
-import java.util.*
+import java.time.OffsetDateTime
 
 @Entity
 class MeetingPlan(
@@ -18,17 +18,21 @@ class MeetingPlan(
     var partner: User,
 
     @Column(nullable = false)
-    var startingDate: Date,
+    var startingDate: OffsetDateTime,
 
     @Column(nullable = false)
-    var period: Short,
+    var period: Short, //in days
 
     @OneToMany(mappedBy = "meetingPlan", cascade = [CascadeType.ALL])
     val meetingItems: MutableList<MeetingItem>,
 
     @OneToMany(mappedBy = "meetingPlan", cascade = [CascadeType.ALL])
-    val meetingInstances: MutableList<MeetingInstance>,
+    val meetingInstances: MutableList<MeetingInstance> = mutableListOf(),
 ) : BaseEntity() {
+    fun canManage(user: User): Boolean {
+        return creator == user || partner == user
+    }
+
     fun toDto(): MeetingPlanDto {
         return MeetingPlanDto(
             id,

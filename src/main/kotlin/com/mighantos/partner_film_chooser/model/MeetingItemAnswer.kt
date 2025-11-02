@@ -8,11 +8,15 @@ import jakarta.persistence.ManyToOne
 @Entity
 class MeetingItemAnswer(
     @Column(nullable = false)
-    val value: String,
+    var value: String,
 
     @ManyToOne
-    @JoinColumn(name = "meeting_item_id", nullable = false)
+    @JoinColumn(name = "respondent_id", nullable = false)
     val respondent: User,
+
+    @ManyToOne
+    @JoinColumn(name = "meeting_instance_id", nullable = false)
+    val meetingInstance: MeetingInstance,
 
     @ManyToOne
     @JoinColumn(name = "meeting_item_id", nullable = false)
