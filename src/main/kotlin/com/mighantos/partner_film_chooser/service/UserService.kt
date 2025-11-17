@@ -25,10 +25,11 @@ class UserService(
 
 
     @Transactional
-    fun create(id: UUID): User {
-        val dbUser = repository.findById(id)
-        if (dbUser.isPresent)
+    fun save(user: User): User {
+        val dbUser = repository.findById(user.id)
+        if (dbUser.isPresent && user == dbUser.get()) {
             return dbUser.get()
-        return repository.save(User(id))
+        }
+        return repository.save(user)
     }
 }

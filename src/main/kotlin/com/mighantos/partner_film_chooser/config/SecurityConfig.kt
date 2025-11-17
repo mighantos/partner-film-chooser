@@ -25,8 +25,6 @@ class SecurityConfig(
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http {
             authorizeHttpRequests {
-                authorize("/login", permitAll)
-                authorize("/register", permitAll)
                 authorize(anyRequest, authenticated)
             }
             oauth2ResourceServer {

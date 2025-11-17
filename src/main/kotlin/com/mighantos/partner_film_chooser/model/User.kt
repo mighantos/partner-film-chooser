@@ -8,6 +8,12 @@ import java.util.*
 class User(
     @Id
     val id: UUID,
+    @Column(nullable = false)
+    val userName: String,
+    @Column(nullable = false)
+    val firstName: String,
+    @Column(nullable = false)
+    val lastName: String,
 ) {
     @OneToMany(mappedBy = "creator")
     private val meetingPlansAsCreator: Set<MeetingPlan> = setOf()
