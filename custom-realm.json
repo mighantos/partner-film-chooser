@@ -14,6 +14,13 @@
       "enabled": true,
       "bearerOnly": false,
       "protocol": "openid-connect",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "attributes": {
+        "use.refresh.tokens": "true",
+        "pkce.code.challenge.method": "S256"
+      },
       "redirectUris": [
         "*"
       ],

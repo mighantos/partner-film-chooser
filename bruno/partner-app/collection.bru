@@ -9,10 +9,10 @@ auth:oauth2 {
   access_token_url: {{keycloak-url}}/realms/{{realm}}/protocol/openid-connect/token
   refresh_token_url: 
   client_id: Partners-app
-  client_secret: {{client-secret}}
+  client_secret: 
   scope: 
   state: 
-  pkce: false
+  pkce: true
   credentials_placement: body
   credentials_id: credentials
   token_placement: header
